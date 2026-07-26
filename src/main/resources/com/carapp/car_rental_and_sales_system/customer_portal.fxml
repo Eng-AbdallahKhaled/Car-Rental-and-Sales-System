@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="rootPane" prefHeight="908.0" prefWidth="1316.0" spacing="15.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.carapp.car_rental_and_sales_system.controller.CustomerPortalController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <!-- العنوان وزر المعاملات وقسم الملف الشخصي -->
+      <HBox alignment="CENTER_LEFT" spacing="20.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label text="Available Cars Showroom" textFill="#fcd513">
+                     <font><Font name="System Bold" size="28.0" /></font>
+                  </Label>
+                  <Label text="Find your dream car to rent or buy" textFill="#e4b300" />
+               </children>
+            </VBox>
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <!-- ✅ قسم الملف الشخصي للعميل -->
+            <HBox alignment="CENTER" spacing="15.0" style="-fx-background-color: #1a1a1a; -fx-padding: 10; -fx-background-radius: 10; -fx-border-color: #333; -fx-border-radius: 10;">
+               <children>
+                  <ImageView fx:id="imgCustomerProfile" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <Label fx:id="lblCustomerName" text="Customer Name" textFill="#fcd513">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboCustomerGender" prefHeight="25.0" prefWidth="130.0" promptText="Gender" style="-fx-background-radius: 5;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnUploadProfileImgAction" prefWidth="70.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 11px; -fx-cursor: hand;" text="📷 Photo" />
+                        <Button mnemonicParsing="false" onAction="#btnSaveProfileAction" prefWidth="70.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 11px; -fx-cursor: hand;" text="💾 Save" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- زر المعاملات السابقة -->
+            <Button fx:id="btnMyTransactions" mnemonicParsing="false" onAction="#btnMyTransactionsAction" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: #f1c40f; -fx-text-fill: black; -fx-font-weight: bold; -fx-cursor: hand;" text="👤 My Transactions" />
+         </children>
+      </HBox>
+      
+      <!-- منطقة البحث والمعاينة -->
+      <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #1a1a1a; -fx-background-radius: 10; -fx-padding: 15;">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="136.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Search Inventory" textFill="#ffd400"><font><Font size="14.0" /></font></Label>
+                  <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="500.0" promptText="🔍 Search by Brand, Model, Year..." style="-fx-background-radius: 15; -fx-font-size: 14px;" />
+               </children>
+            </VBox>
+            
+            <Region HBox.hgrow="ALWAYS" />
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            
+            <VBox alignment="CENTER" style="-fx-border-color: #333; -fx-border-radius: 10; -fx-border-style: dashed;">
+               <padding><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></padding>
+               <children>
+                  <ImageView fx:id="imgCarPreview" fitHeight="185.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <TableView fx:id="tableCars" style="-fx-font-size: 14px;" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="colBrand" prefWidth="120.0" text="Brand" />
+          <TableColumn fx:id="colModel" prefWidth="120.0" text="Model" />
+          <TableColumn fx:id="colYear" prefWidth="80.0" text="Year" />
+          <TableColumn fx:id="colColor" prefWidth="100.0" text="Color" />
+          <TableColumn fx:id="colSalePrice" prefWidth="130.0" text="Sale Price" />
+          <TableColumn fx:id="colPricePerDay" prefWidth="130.0" text="Rent/Day" />
+          <TableColumn fx:id="colStatus" prefWidth="250.0" text="Availability Status" />
+        </columns>
+      </TableView>
+      
+      <HBox alignment="CENTER_LEFT" spacing="20.0">
+         <children>
+            <Button fx:id="btnShowImages" mnemonicParsing="false" onAction="#btnShowImagesAction" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="📷 View Gallery" />
+            <Button fx:id="btnGuestRent" mnemonicParsing="false" onAction="#btnGuestRentAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="🔑 Rent Now" />
+            <Button fx:id="btnGuestBuy" mnemonicParsing="false" onAction="#btnGuestBuyAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="💰 Buy Now" />
+            
+            <Region HBox.hgrow="ALWAYS" />
+            <Separator orientation="VERTICAL" />
+            
+            <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#btnLogoutAction" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="🚪 Logout" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

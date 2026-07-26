@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="rootPane" prefHeight="899.0" prefWidth="1315.0" spacing="15.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.carapp.car_rental_and_sales_system.controller.CustomerController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <!-- العنوان والبحث -->
+      <HBox alignment="CENTER_LEFT" spacing="20.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label text="Active Customers" textFill="#fcd513">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label text="Manage your active client database" textFill="#e4b300">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+               </children>
+            </VBox>
+            <Region prefHeight="57.0" prefWidth="494.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtSearch" prefHeight="35.0" prefWidth="500.0" promptText="🔍 Search customers by Name, National ID or Phone..." style="-fx-background-radius: 15; -fx-font-size: 14px;" />
+         </children>
+      </HBox>
+      
+      <!-- منطقة الإدخال المطورة -->
+      <HBox alignment="CENTER_LEFT" prefWidth="1260.0" spacing="20.0" style="-fx-background-color: #1a1a1a; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 5);">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <VBox spacing="15.0">
+               <children>
+                  <Label text="Customer Details" textFill="#ffcc00"><font><Font name="System Bold" size="14.0" /></font></Label>
+                  <HBox spacing="20.0">
+                     <children>
+                        <TextField fx:id="txtName" prefHeight="35.0" prefWidth="250.0" promptText="Full Name" style="-fx-background-radius: 5;" />
+                        <TextField fx:id="txtNationalId" prefHeight="35.0" prefWidth="200.0" promptText="National ID (14 Digits)" style="-fx-background-radius: 5;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="20.0">
+                     <children>
+                        <TextField fx:id="txtPhone" prefHeight="35.0" prefWidth="200.0" promptText="Phone Number" style="-fx-background-radius: 5;" />
+                        <ComboBox fx:id="comboGender" prefHeight="35.0" prefWidth="150.0" promptText="Gender" style="-fx-background-radius: 5;" />
+                        <Button mnemonicParsing="false" onAction="#btnUploadImageAction" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand;" text="📷 Upload Photo" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <!-- فاصل عمودي -->
+            <VBox alignment="CENTER">
+                <Separator orientation="VERTICAL" prefHeight="85.0" />
+            </VBox>
+            
+            <!-- زر الإضافة -->
+            <VBox alignment="CENTER">
+                <Button mnemonicParsing="false" onAction="#btnAddCustomer" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 14px;" text="➕ Add Customer" />
+            </VBox>
+            
+            <!-- فاصل قبل الصورة -->
+            <VBox alignment="CENTER">
+                <Separator orientation="VERTICAL" prefHeight="85.0" />
+            </VBox>
+            
+            <!-- صورة العميل -->
+            <VBox alignment="CENTER" style="-fx-border-color: #333; -fx-border-radius: 10; -fx-border-style: dashed; -fx-background-color: #0b0b0b;">
+               <padding><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></padding>
+               <children>
+                  <ImageView fx:id="imgCustomerPreview" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <!-- الجدول -->
+      <TableView fx:id="tableCustomers" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="300.0" text="Customer Name" />
+          <TableColumn fx:id="colNationalId" prefWidth="200.0" text="National ID" />
+          <TableColumn fx:id="colPhone" prefWidth="200.0" text="Phone Number" />
+          <TableColumn fx:id="colGender" prefWidth="150.0" text="Gender" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      
+      <!-- شريط الأزرار السفلي -->
+      <HBox alignment="CENTER_LEFT" spacing="20.0">
+         <children>
+            <Button fx:id="btnViewTransactions" disable="true" mnemonicParsing="false" onAction="#btnViewTransactionsAction" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="📜 View Transactions" />
+            
+            <!-- ✅ الزرار الجديد بتاع الإكسيل -->
+            <Button mnemonicParsing="false" onAction="#btnExportToExcelAction" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="📊 Export Excel" />
+            
+            <Button fx:id="btnUpdateCustomer" disable="true" mnemonicParsing="false" onAction="#btnUpdateCustomer" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #f1c40f; -fx-text-fill: black; -fx-font-weight: bold; -fx-cursor: hand;" text="✏️ Update" />
+            
+            <Button fx:id="btnArchiveCustomer" disable="true" mnemonicParsing="false" onAction="#btnArchiveCustomer" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="📁 Archive" />
+            
+            <Button fx:id="btnDeactivateAll" mnemonicParsing="false" onAction="#btnDeactivateAllAction" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="🚫 Archive All" />
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <VBox alignment="CENTER">
+               <Separator orientation="VERTICAL" prefHeight="35.0" />
+            </VBox>
+            
+            <Button fx:id="btnDeleteCustomer" disable="true" mnemonicParsing="false" onAction="#btnDeleteCustomer" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="❌ Delete" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
